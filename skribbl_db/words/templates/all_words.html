@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Skribbl.db
+{% endblock %}
+
+{% block content %}
+    <p><a href="/">HOME</a></p>
+
+    <h1>Words</h1>
+
+    <div class="copy-box">
+        {% for w in all_words %}
+        <a href="details/{{ w.id }}" >{{ w.word }}, </a>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Details: {{ word.word }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ word.word }} {{ word.active }}</h1>
+
+    <p>Back to <a href="/words">Words</a></p>
+{% endblock %}
