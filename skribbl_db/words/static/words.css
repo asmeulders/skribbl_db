@@ -9,6 +9,19 @@
 
 /* General */
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid lightgrey;
+}
+
+.login-btn {
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 10px;
+}
+
 .page-section {
     width: 90%;
     margin: auto;
