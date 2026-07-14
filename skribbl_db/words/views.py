@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.template import loader
 
 from .models import Word
+from .forms import NewWordForm
 
 def words(request):
     all_words = Word.objects.all().values()
@@ -29,3 +30,20 @@ def testing(request):
     'fruits': ['Apple', 'Banana', 'Cherry'],   
   }
   return HttpResponse(template.render(context, request))
+
+def new_word(request):
+    if request.method == 'POST':
+        form = NewWordForm(request.POST)
+        
+        if form.is_valid():
+            word = Word(word=form.cleaned_data['word'], active=True)
+            word.save()
+    else:
+        form = NewWordForm(initial={'word': ''})
+
+    context = {
+        'form': form
+    }
+
+    template = loader.get_template('new_word.html')
+    return HttpResponse(template.render(context, request))

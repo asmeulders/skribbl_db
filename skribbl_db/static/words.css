@@ -1,0 +1,26 @@
+.copy-box {
+    margin: auto;
+    padding: 1em;
+    box-sizing: border-box;
+    min-height: 25vw;
+    width: 75%;
+    background-color: lightgrey;
+    border-style: inset;
+    border-radius: 1em;
+}
+
+.copy-box a {
+    color: black;
+    text-decoration: none;
+}
+
+.copy-box a:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.form-control {
+    width: 500px;
+    height: 100px;
+    border: none;
+}

@@ -9,9 +9,15 @@
 
     <h1>Words</h1>
 
+    <a href="new_word/">Add a word</a>
+
     <div class="copy-box">
         {% for w in all_words %}
-        <a href="details/{{ w.id }}" >{{ w.word }}, </a>
+            {% if forloop.last %}
+                <a href="details/{{ w.id }}" >{{ w.word }}</a>
+            {% else %}
+                <a href="details/{{ w.id }}" >{{ w.word }}, </a>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
