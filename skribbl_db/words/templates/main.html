@@ -8,10 +8,45 @@
 
 
 {% block content %}
-  <h1>Skribbl.db</h1>
+  <div class="header">
+    <h1>Skribbl.db</h1>
+    <button type="button">Log In</button>
+  </div>
 
-  <h3>Words</h3>
-  
-  <p><a href="words/">Make your list</a></p>
-  
+  <h2>About</h2>
+  <div class="page-section">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione mollitia, cum hic, eveniet velit rerum cupiditate animi veniam nesciunt, accusamus doloremque et dicta eos? Expedita doloribus delectus consectetur ratione suscipit?</p>
+  </div>
+
+  <h2>Custom WordSets</h2>
+  <div class="page-section">
+    <div class="wordset-container">
+
+      <div class="wordset-list">
+        <div class="preset-container">
+          <h3>Presets</h3>
+          <ul class="preset-list">
+            <li class="preset-item">Easy</li>
+            <li class="preset-item">Medium</li>
+            <li class="preset-item">Hard</li>
+          </ul>
+        </div>
+        
+        <p><a href="words/">Make your own WordSet</a></p>
+      </div>
+
+      <div class="copy-box-container">
+        <button type="button">Copy</button>
+        <button type="button">Export as .txt</button>
+        <div class="copy-box">
+          words, words, words
+        </div>
+        <div class="copy-box-info">
+          <p>Num Words: </p>
+          <p>Characters: </p>
+        </div>
+      </div>
+
+    </div>
+  </div>  
 {% endblock %}

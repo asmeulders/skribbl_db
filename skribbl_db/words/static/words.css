@@ -1,3 +1,32 @@
+/* index.html */
+
+.page-content {
+    width: 80vw;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/* General */
+
+.page-section {
+    width: 90%;
+    margin: auto;
+}
+
+/* main.html */
+
+.wordset-container {
+    display: flex;
+
+}
+
+/* Copy Box */
+
+.copy-box-container {
+    width: 100%;
+}
+
 .copy-box {
     margin: auto;
     padding: 1em;
@@ -18,6 +47,8 @@
     cursor: pointer;
     color: blue;
 }
+
+/* Forms */
 
 .form-control {
     width: 10vw;
