@@ -26,9 +26,9 @@
         <div class="preset-container">
           <h3>Presets</h3>
           <ul class="preset-list">
-            <li class="preset-item">Easy</li>
-            <li class="preset-item">Medium</li>
-            <li class="preset-item">Hard</li>
+            <li class="preset-item"><p>Easy</p></li>
+            <li class="preset-item"><p>Medium</p></li>
+            <li class="preset-item"><p>Hard</p></li>
           </ul>
         </div>
 
@@ -36,17 +36,32 @@
       </div>
 
       <div class="copy-box-container">
-        <button type="button"><i class="fa fa-copy"></i></button>
-        <button type="button">Export as .txt</button>
         <div class="copy-box">
-          words, words, words
+          <button type="button" class="copy-btn" onclick="copyText(document.getElementById('copy-box-content'))"><i class="fa fa-copy"></i></button>
+          <p id="copy-box-content">words, words, words</p>
         </div>
         <div class="copy-box-info">
-          <p>Num Words: </p>
-          <p>Characters: </p>
+          <p><span>Num Words:</span> <span>Characters:</span></p>
+          
+          <button type="button" class="export-btn" onclick="downloadTextContent(document.getElementById('copy-box-content'))">Export as .txt</button>
         </div>
       </div>
 
     </div>
   </div>  
+
+  <script>
+    function copyText(element) {
+      navigator.clipboard.writeText(element.innerText);
+    }
+
+    function downloadTextContent(element, filename = 'download.txt') {
+      const blob = new Blob([element.innerText], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+  </script>
 {% endblock %}

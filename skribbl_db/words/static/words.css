@@ -31,24 +31,24 @@
 
 .wordset-container {
     display: flex;
-
 }
 
 /* Copy Box */
 
 .copy-box-container {
-    width: 100%;
+    margin: auto;
+    width: 75%;
 }
 
 .copy-box {
+    position: relative;
     margin: auto;
     padding: 1em;
     box-sizing: border-box;
+    width: 100%;
     min-height: 25vw;
-    width: 75%;
     background-color: lightgrey;
     border-style: inset;
-    border-radius: 1em;
 }
 
 .copy-box a {
@@ -56,9 +56,48 @@
     text-decoration: none;
 }
 
+.copy-box p {
+    margin: 0;
+}
+
 .copy-box a:hover {
     cursor: pointer;
     color: blue;
+}
+
+.copy-box:hover .copy-btn {
+    display: block;
+}
+
+.copy-box-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copy-btn {
+    display: none;
+    position: absolute;
+    inset: 5px 5px auto auto;
+    width: 2em; height: 2em;
+}
+
+.export-btn {
+    height: 2em; width: fit-content;
+}
+
+.preset-list {
+    margin: 1em;
+}
+
+.preset-list p {
+    margin: 0;
+}
+
+.preset-item:hover {
+    color: darkgrey;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 /* Forms */
