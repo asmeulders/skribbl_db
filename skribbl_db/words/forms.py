@@ -40,8 +40,15 @@ class NewWordForm(forms.ModelForm):
         if len(data) < 1 or len(data) > 32:
             raise ValidationError("Invalid word: Length must be between 1 and 32.")  
 
-        # all lowercase
-        data = data.lower()
+        # Make list of all spaces
+        indices = []
+        start = 0
+        index = data.find(' ')
+        while index != -1:
+            indices.append(index)
+            data = data[start] + data[start+1:index].lower() + data[index:]
+            start = index + 1
+            index = data.find(' ', start)
 
         return data
         
