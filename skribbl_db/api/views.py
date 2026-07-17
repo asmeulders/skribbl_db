@@ -52,3 +52,9 @@ class WordDetail(APIView):
         word = self.get_object(id)
         word.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+class WordSet(APIView):
+    """
+    Retrieve all/one WordSet(s), make a new word set, delete, and update a word set
+    """
