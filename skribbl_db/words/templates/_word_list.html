@@ -1,0 +1,9 @@
+<ul id="word-list">
+    {% for w in all_words %}
+        {% if forloop.last %}
+            <li><a href="details/{{ w.id }}" >{{ w.word }}</a></li>
+        {% else %}
+            <li><a href="details/{{ w.id }}" >{{ w.word }}, </a></li>
+        {% endif %}
+    {% endfor %}
+</ul>

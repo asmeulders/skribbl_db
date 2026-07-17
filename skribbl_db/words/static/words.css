@@ -33,6 +33,16 @@
     display: flex;
 }
 
+/* all_words.html */
+
+
+
+/* _word_list.html */
+
+#word-list li {
+    display: inline-block;
+}
+
 /* Copy Box */
 
 .copy-box-container {
