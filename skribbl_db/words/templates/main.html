@@ -29,7 +29,7 @@
 
   <h2>Custom WordSets</h2>
   <div class="page-section">
-    <div class="wordset-container">
+    <div class="main-container">
 
       <div class="wordset-list">
         <div class="preset-container">
@@ -45,33 +45,8 @@
         <p><a href="words/">Make your own WordSet</a></p>
       </div>
 
-      <div class="copy-box-container">
-        <div class="copy-box">
-          <button type="button" class="copy-btn" onclick="copyText(document.getElementById('copy-box-content'))"><i class="fa fa-copy"></i></button>
-          <p id="copy-box-content">words, words, words</p>
-        </div>
-        <div class="copy-box-info">
-          <p><span>Num Words:</span> <span>Characters:</span></p>
-          
-          <button type="button" class="export-btn" onclick="downloadTextContent(document.getElementById('copy-box-content'))">Export as .txt</button>
-        </div>
-      </div>
+      {% block wordset_content %}{% include "./_wordset_container.html" %}{% endblock%}
 
     </div>
   </div>  
-
-  <script>
-    function copyText(element) {
-      navigator.clipboard.writeText(element.innerText);
-    }
-
-    function downloadTextContent(element, filename = 'download.txt') {
-      const blob = new Blob([element.innerText], { type: 'text/plain' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = filename;
-      a.click();
-      URL.revokeObjectURL(a.href);
-    }
-  </script>
 {% endblock %}

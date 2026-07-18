@@ -25,9 +25,7 @@
         </ul>
 
         <div class="wordset-grid-item">
-            <div class="copy-box">
-                {% include '_word_list.html' %}
-            </div>
+            {% block wordset_content %}{% include "./_wordset_container.html" %}{% endblock%}
             <h4>New Word</h4>
 
             <form id="word-form" action="" method="post">
@@ -37,6 +35,8 @@
                 </table>
                 <input type="submit" value="Submit">
             </form>
+
+            
         </div>
     </div>    
 
