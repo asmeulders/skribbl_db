@@ -39,7 +39,17 @@
 
 /* all_words.html */
 
+.wordset-grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1px;
+    background-color: black;
+}
 
+.wordset-grid-item {
+    background-color: white;
+    padding: 20px;
+}
 
 /* _word_list.html */
 

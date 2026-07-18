@@ -9,21 +9,36 @@
 
     <h1>Words</h1>
 
-    <h2>New Word</h2>
+    <div class="wordset-grid">
+        <div class="wordset-grid-item"><h3>Custom WordSets</h2></div>
+        
+        <div class="wordset-grid-item">
+            <button type="button">New</button>
+            <button type="button">...</button>
+        </div>
 
-    <form id="word-form" action="" method="post">
-        {% csrf_token %}
-        <table>
-        {{ form.word }}
-        </table>
-        <input type="submit" value="Submit">
-    </form>
+        <ul class="wordset-grid-item">
+            <li>Easy</li> 
+            <li>Easy</li> 
+            <li>Easy</li> 
+            <li>Easy</li> 
+        </ul>
 
-    <h2>WordSet</h2>
+        <div class="wordset-grid-item">
+            <div class="copy-box">
+                {% include '_word_list.html' %}
+            </div>
+            <h4>New Word</h4>
 
-    <div class="copy-box">
-        {% include '_word_list.html' %}
-    </div>
+            <form id="word-form" action="" method="post">
+                {% csrf_token %}
+                <table>
+                {{ form.word }}
+                </table>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>    
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
