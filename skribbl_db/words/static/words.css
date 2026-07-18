@@ -13,7 +13,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid lightgrey;
+    border-bottom: 2px solid grey;
 }
 
 .login-btn {
@@ -28,6 +28,10 @@
 }
 
 /* main.html */
+
+.presets-header {
+    border-bottom: 1px solid grey;
+}
 
 .wordset-container {
     display: flex;

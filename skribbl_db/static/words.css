@@ -1,12 +1,58 @@
+/* index.html */
+
+.page-content {
+    width: 80vw;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/* General */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid grey;
+}
+
+.login-btn {
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 10px;
+}
+
+.page-section {
+    width: 90%;
+    margin: auto;
+}
+
+/* main.html */
+
+.presets-header {
+    border-bottom: 1px solid grey;
+}
+
+.wordset-container {
+    display: flex;
+}
+
+/* Copy Box */
+
+.copy-box-container {
+    margin: auto;
+    width: 75%;
+}
+
 .copy-box {
+    position: relative;
     margin: auto;
     padding: 1em;
     box-sizing: border-box;
+    width: 100%;
     min-height: 25vw;
-    width: 75%;
     background-color: lightgrey;
     border-style: inset;
-    border-radius: 1em;
 }
 
 .copy-box a {
@@ -14,13 +60,52 @@
     text-decoration: none;
 }
 
+.copy-box p {
+    margin: 0;
+}
+
 .copy-box a:hover {
     cursor: pointer;
     color: blue;
 }
 
+.copy-box:hover .copy-btn {
+    display: block;
+}
+
+.copy-box-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copy-btn {
+    display: none;
+    position: absolute;
+    inset: 5px 5px auto auto;
+    width: 2em; height: 2em;
+}
+
+.export-btn {
+    height: 2em; width: fit-content;
+}
+
+.preset-list {
+    margin: 1em;
+}
+
+.preset-list p {
+    margin: 0;
+}
+
+.preset-item:hover {
+    color: darkgrey;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Forms */
+
 .form-control {
-    width: 500px;
-    height: 100px;
-    border: none;
+    width: 10vw;
 }
