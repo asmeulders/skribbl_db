@@ -1,0 +1,16 @@
+
+{% extends "index.html" %}
+
+{% block title %}
+  New WordSet
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import WordSerializer
+from .serializers import WordSerializer, WordSetSerializer
 from rest_framework import status
 
 from words.models import Word, WordSet
@@ -59,7 +59,13 @@ class WordSetView(APIView):
     Retrieve all/one WordSet(s), make a new word set, delete, and update a word set
     """
     def get_object(self, id):
-        try:
-            return WordSet.objects.get(id=id)
-        except WordSet.DoesNotExist:
-            raise Http404
+        if id is not None:
+            try:
+                item = WordSet.objects.get(WordSet, id=id)
+                serializer = WordSetSerializer(item)
+            except:
+                raise Http404
+        else:
+            items = WordSet.objects.all()
+            serializer = WordSetSerializer(items, many=True)
+        return Response(serializer.data)

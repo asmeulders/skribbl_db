@@ -1,8 +1,8 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 
-from .models import Word
-from .forms import NewWordForm
+from .models import Word, WordSet
+from .forms import NewWordForm, NewWordSetForm
 
 def words(request):
     if request.method == 'POST':
@@ -44,6 +44,40 @@ def testing(request):
     'fruits': ['Apple', 'Banana', 'Cherry'],   
   }
   return HttpResponse(template.render(context, request))
+
+def new_wordset(request):
+    if request.method == 'POST':
+        form = NewWordForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            word_list = form.cleaned_data['word_list']
+
+            set = WordSet(name=name)
+
+            for word in word_list:
+                try:
+                    # get word from db
+                    fetched_word = Word.objects.get(word=word)
+                    set.words.add(fetched_word)
+                    print("added fetched words")
+                except:
+                    # make new word
+                    new_word = Word(word=word)
+                    new_word.save()
+                    set.words.add(new_word)
+                    print("added new word")
+
+            set.save()
+            return HttpResponseRedirect(f'words/')
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+    
+    else:
+        form = NewWordSetForm(initial={'name': '', 'words': ''})
+
+    template = loader.get_template('new_wordset.html')
+    context = {'form': form}
+    return HttpResponse(template.render(context, request))
 
 def new_word(request):
     if request.method == 'POST':

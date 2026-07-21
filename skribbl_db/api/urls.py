@@ -4,5 +4,5 @@ from .views import WordsView, WordSetView
 
 urlpatterns = [
     path('words/', WordsView.as_view(), name='words'),
-    path('words/wordset', WordSetView.as_view(), name='word_set')
+    path('wordsets/', WordSetView.as_view(), name='word_set')
 ]

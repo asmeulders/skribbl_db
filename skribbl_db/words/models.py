@@ -14,8 +14,8 @@ class Word(models.Model):
 
 class WordSet(models.Model):
     name = models.CharField(max_length=24, unique=True)
-    num_chars = models.PositiveIntegerField()
-    num_words = models.PositiveIntegerField()
+    num_chars = models.PositiveIntegerField(null=True)
+    num_words = models.PositiveIntegerField(null=True)
     words = models.ManyToManyField(Word)
 
     class Meta:
