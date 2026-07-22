@@ -14,9 +14,9 @@ class Word(models.Model):
 
 class WordSet(models.Model):
     name = models.CharField(max_length=24, unique=True)
-    num_chars = models.PositiveIntegerField(null=True)
-    num_words = models.PositiveIntegerField(null=True)
-    words = models.ManyToManyField(Word)
+    num_chars = models.PositiveIntegerField(default=0)
+    num_words = models.PositiveIntegerField(default=0)
+    words = models.ManyToManyField(Word, blank=True)
 
     class Meta:
         ordering = ["name"]

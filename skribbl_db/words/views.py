@@ -1,8 +1,11 @@
+import logging
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 
 from .models import Word, WordSet
 from .forms import NewWordForm, NewWordSetForm
+
+logger = logging.getLogger(__name__)
 
 def words(request):
     if request.method == 'POST':
@@ -59,13 +62,13 @@ def new_wordset(request):
                     # get word from db
                     fetched_word = Word.objects.get(word=word)
                     set.words.add(fetched_word)
-                    print("added fetched words")
+                    logger.debug("added fetched words")
                 except:
                     # make new word
                     new_word = Word(word=word)
                     new_word.save()
                     set.words.add(new_word)
-                    print("added new word")
+                    logger.debug("added new word")
 
             set.save()
             return HttpResponseRedirect(f'words/')

@@ -1,7 +1,10 @@
+import logging
 from django import forms
 from django.core.exceptions import ValidationError
 
 from .models import Word, WordSet
+
+logger = logging.getLogger(__name__)
 
 class NewWordForm(forms.ModelForm):
     class Meta:
@@ -26,15 +29,16 @@ class NewWordForm(forms.ModelForm):
 
 class NewWordSetForm(forms.Form):
     name = forms.CharField(max_length=24)
-    words = forms.CharField(widget=forms.Textarea)
+    custom_words = forms.CharField(widget=forms.Textarea)
 
-    def clean_words(self):
-        data = self.cleaned_data['words']
+    def clean_custom_words(self):
+        logger.debug("clean custom_words")
+        data = self.cleaned_data['custom_words']
 
         try:
             assert isinstance(data, str)
         except AssertionError:
-            raise ValidationError("Invalid input: Words but be a string.")
+            raise ValidationError("Invalid input: custom_words but be a string.")
 
         word_list = make_word_list_from_input(data)
         self.cleaned_data['word_list'] = word_list
