@@ -31,18 +31,19 @@
   <div class="page-section">
     <div class="main-container">
 
-      <div class="wordset-list">
-        <div class="preset-container">
-          <h3 class="presets-header">Presets</h3>
-          <ul class="preset-list">
-            <li class="preset-item"><p>Easy</p></li>
-            <li class="preset-item"><p>Medium</p></li>
-            <li class="preset-item"><p>Hard</p></li>
-            <li class="preset-item"><p>Difficult</p></li>
+      <div>
+        <div class="select-container">
+          <h3 class="select-header">Presets</h3>
+          <ul class="select-list">
+            <li class="select-item"><p>Easy</p></li>
+            <li class="select-item"><p>Medium</p></li>
+            <li class="select-item"><p>Hard</p></li>
+            <li class="select-item"><p>Difficult</p></li>
           </ul>
         </div>
 
-        <p><a href="wordsets/">Make your own WordSet</a></p>
+        <p><a href="new-wordset/">Make your own WordSet</a></p>
+        <p><a href="wordsets/">View Wordsets</a></p>
       </div>
 
       {% block wordset_content %}{% include "./_wordset_container.html" %}{% endblock%}

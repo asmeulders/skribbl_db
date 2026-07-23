@@ -12,8 +12,8 @@ def words(request):
         form = NewWordForm(request.POST)
         if form.is_valid():
             form.save()
-            all_words = Word.objects.all().values()
-            list_html = loader.render_to_string('_word_list.html', {'all_words': all_words}, request=request)
+            word_data = Word.objects.all().values()
+            list_html = loader.render_to_string('_word_list.html', {'word_data': word_data}, request=request)
             return JsonResponse({'success': True, 'list_html': list_html})
         else:
             return JsonResponse({'success': False, 'errors': form.errors}, status=400)
@@ -21,10 +21,10 @@ def words(request):
     else:
         form = NewWordForm(initial={'word': ''})
     
-    all_words = Word.objects.all().values()
+    word_data = Word.objects.all().values()
     template = loader.get_template('all_words.html')
     context = {
-        'all_words': all_words,
+        'word_data': word_data,
         'form': form
     }
     return HttpResponse(template.render(context, request))
@@ -48,12 +48,22 @@ def testing(request):
   }
   return HttpResponse(template.render(context, request))
 
+def wordsets(request, id):    
+    word_data = WordSet.objects.get(id=id).words.all()
+    wordset_data = WordSet.objects.all().values()
+    template = loader.get_template('wordsets.html')
+    context = {
+        'word_data': word_data,
+        'wordset_data': wordset_data,
+    }
+    return HttpResponse(template.render(context, request))
+
 def new_wordset(request):
     if request.method == 'POST':
         form = NewWordSetForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/words/')
+            return HttpResponseRedirect(f'/wordsets/{form.instance.id}')
         else:
             return JsonResponse({'success': False, 'errors': form.errors}, status=400)
     

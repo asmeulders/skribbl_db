@@ -110,15 +110,26 @@
     height: 2em; width: fit-content;
 }
 
-.preset-list {
+/* WordSet Selection */
+
+.select-container {
+
+}
+
+.select-list {
     margin: 1em;
 }
 
-.preset-list p {
+.select-list p {
     margin: 0;
 }
 
-.preset-item:hover {
+.select-list a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.select-item:hover {
     color: darkgrey;
     text-decoration: underline;
     cursor: pointer;
@@ -129,3 +140,4 @@
 .form-control {
     width: 10vw;
 }
+

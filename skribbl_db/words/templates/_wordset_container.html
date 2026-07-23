@@ -2,11 +2,11 @@
     <div class="wordset-box">
         <button type="button" class="copy-btn" onclick="copyText(document.getElementById('copy-box-content'))"><i class="fa fa-copy"></i></button>
         <ul id="word-list">
-            {% for w in all_words %}
+            {% for w in word_data %}
                 {% if forloop.last %}
                     <li><a href="details/{{ w.id }}" >{{ w.word }}</a></li>
                 {% else %}
-                    <li><a href="details/{{ w.id }}" >{{ w.word }}, </a></li>
+                    <li><a href="details/{{ w.id }}" >{{ w.word }},</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
