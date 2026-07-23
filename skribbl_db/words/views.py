@@ -50,14 +50,10 @@ def testing(request):
 
 def new_wordset(request):
     if request.method == 'POST':
-        form = NewWordForm(request.POST)
+        form = NewWordSetForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            word_list = form.cleaned_data['word_list']
-
-            set = WordSet(name=name, words=word_list)
-            set.save()
-            return HttpResponseRedirect(f'words/')
+            form.save()
+            return HttpResponseRedirect('/words/')
         else:
             return JsonResponse({'success': False, 'errors': form.errors}, status=400)
     
@@ -71,7 +67,6 @@ def new_wordset(request):
 def new_word(request):
     if request.method == 'POST':
         form = NewWordForm(request.POST)
-        
         if form.is_valid():
             word = Word(word=form.cleaned_data['word'], active=True)
             word.save()

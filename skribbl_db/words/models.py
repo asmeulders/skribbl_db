@@ -4,15 +4,11 @@ from django.db import models
 logger = logging.getLogger(__name__)
 
 class Word(models.Model):
-    word = models.CharField(max_length=32)
+    word = models.CharField(max_length=32, unique=True)
     active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["word"]
-
-    def __init__(self, word: str, active = True):
-        self.word = word
-        self.active = active
 
     def __str__(self):
         return f"{self.word}"
@@ -27,33 +23,23 @@ class WordSet(models.Model):
     class Meta:
         ordering = ["name"]
 
-    def __init__(self, name: str, words: list[str]):
-        self.name = name
-        # Define words (many to many field)
-        self.init_word_relations(words)
-        self.num_chars = get_num_chars(words)
-        self.num_words = len(words)
-
-
-    def __str__(self):
-        return f"{self.name} ({self.num_words} words)"
-
+    @classmethod
+    def create_with_words(cls, name: str, words: list[str]) -> "WordSet":
+        obj = cls.objects.create(name=name, num_chars=get_num_chars(words), num_words=len(words))
+        obj.init_word_relations(words)
+        return obj
 
     def init_word_relations(self, words: list[str]) -> None:
         for word in words:
             try:
-                # Existing word
-                fetched_word = Word.objects.get(word=word)
-                self.words.add(fetched_word)
-                logger.debug("added fetched words")
-            except Word.DoesNotExist:
-                # New Word
-                new_word = Word(word=word)
-                new_word.save()
-                self.words.add(new_word)
-                logger.debug("added new word")
+                word_obj, created = Word.objects.get_or_create(word=word)
+                self.words.add(word_obj)
+                logger.debug(f"added word: {word} - created: {created}")
             except:
-                logger.warning("an error occurred when initializing wordset relations")
+                logger.error("an error occurred when initializing wordset relations")
+
+    def __str__(self):
+            return f"{self.name} ({self.num_words} words)"
 
 def get_num_chars(words: list[str]) -> int:
     num: int = 0

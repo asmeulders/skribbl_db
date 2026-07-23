@@ -27,34 +27,42 @@ class NewWordForm(forms.ModelForm):
 
         return clean_single_word_input(data)
 
-class NewWordSetForm(forms.Form):
-    name = forms.CharField(max_length=24)
-    custom_words = forms.CharField(widget=forms.Textarea)
+class NewWordSetForm(forms.ModelForm):
+    words = forms.CharField(
+        required=False,
+        help_text="Comma-separated",
+        widget=forms.Textarea(attrs={'placeholder': 'place, words, here'})
+    )
 
-    def clean_custom_words(self):
-        logger.debug("clean custom_words")
-        data = self.cleaned_data['custom_words']
+    class Meta:
+        model = WordSet
+        fields = ['name']
+
+    def clean_words(self) -> list[str]:
+        logger.debug("clean words")
+        raw = self.cleaned_data['words']
 
         try:
-            assert isinstance(data, str)
+            assert isinstance(raw, str)
         except AssertionError:
-            raise ValidationError("Invalid input: custom_words but be a string.")
+            raise ValidationError("Invalid input: words but be a string.")
 
-        word_list = make_word_list_from_input(data)
-        self.cleaned_data['word_list'] = word_list
-        
-        return ','.join(word_list)
-        
+        return [clean_single_word_input(word) for word in raw.split(',') if word.strip()]
 
-def make_word_list_from_input(data: str):
-    # Remove padded spaces
-    data = data.strip()
+    def save(self, commit=True) -> "WordSet":
+        instance = super().save(commit=commit)
+        if commit:
+            self._save_words(instance)
+        return instance
 
-    # Separate into a list by commas
-    return [clean_single_word_input(word) for word in data.split(',')]
-    
+    def save_m2m(self) -> None:
+        self._save_words(self.instance)
 
-def clean_single_word_input(data: str):
+    def _save_words(self, instance) -> None:
+        words = [Word.objects.get_or_create(word=word)[0] for word in self.cleaned_data['words']]
+        instance.words.set(words)
+
+def clean_single_word_input(data: str) -> str:
     # Remove padded spaces
     data = data.strip()
 
