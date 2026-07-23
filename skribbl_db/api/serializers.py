@@ -8,6 +8,8 @@ class WordSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class WordSetSerializer(serializers.ModelSerializer):
+    words = serializers.CharField(max_length=5000, read_only=True)
+    
     class Meta:
         model = WordSet
-        fields = '__all__'
+        fields = ['name', 'words']

@@ -55,21 +55,7 @@ def new_wordset(request):
             name = form.cleaned_data['name']
             word_list = form.cleaned_data['word_list']
 
-            set = WordSet(name=name)
-
-            for word in word_list:
-                try:
-                    # get word from db
-                    fetched_word = Word.objects.get(word=word)
-                    set.words.add(fetched_word)
-                    logger.debug("added fetched words")
-                except:
-                    # make new word
-                    new_word = Word(word=word)
-                    new_word.save()
-                    set.words.add(new_word)
-                    logger.debug("added new word")
-
+            set = WordSet(name=name, words=word_list)
             set.save()
             return HttpResponseRedirect(f'words/')
         else:
